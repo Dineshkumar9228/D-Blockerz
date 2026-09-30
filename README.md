@@ -1,79 +1,78 @@
 # 🛡️ D-Blockerz
 
-A privacy-focused browser extension for blocking ads and trackers.
+D-Blockerz is a privacy-focused browser extension that blocks ads and trackers while you browse the web.
 
-D-Blockerz is a Manifest V3 browser extension built with React, TypeScript, Vite, and Tailwind CSS.
-
-The project is being developed incrementally using a modular architecture, automated testing, and AI-assisted development.
+I'm building it as a **Manifest V3 Chrome extension** using React, TypeScript, Vite, and Tailwind CSS. The project is being developed step by step, with a focus on keeping the codebase simple, modular, and easy to maintain.
 
 ---
 
 ## 🚧 Project Status
 
-**Current Status:** Sprint 1 — Foundation ✅
+**Current Status: Sprint 1 — Foundation ✅**
 
-### Sprint Progress
+The project is being developed in multiple sprints:
 
-- [x] Sprint 1 — Foundation
-- [ ] Sprint 2 — Chrome Extension Foundation
-- [ ] Sprint 3 — Blocking Engine
-- [ ] Sprint 4 — User Controls
-- [ ] Sprint 5 — Statistics
-- [ ] Sprint 6 — Filter Lists
-- [ ] Sprint 7 — Automated Testing
-- [ ] Sprint 8 — Performance & Security
-- [ ] Sprint 9 — UI/UX Polish
-- [ ] Sprint 10 — Release
-
----
-
-# 🎯 Project Goal
-
-D-Blockerz aims to provide a browser-based privacy and content-blocking solution capable of:
-
-- Blocking advertisements
-- Blocking trackers
-- Managing blocked requests
-- Allowing users to whitelist websites
-- Providing blocking statistics
-- Providing per-site controls
-- Supporting customizable blocking rules
-- Providing a clean and simple user interface
-
-The first version focuses on building a reliable browser extension with a modular architecture.
+* [x] Sprint 1 — Foundation
+* [ ] Sprint 2 — Chrome Extension Foundation
+* [ ] Sprint 3 — Blocking Engine
+* [ ] Sprint 4 — User Controls
+* [ ] Sprint 5 — Statistics
+* [ ] Sprint 6 — Filter Lists
+* [ ] Sprint 7 — Automated Testing
+* [ ] Sprint 8 — Performance & Security
+* [ ] Sprint 9 — UI/UX Polish
+* [ ] Sprint 10 — Release
 
 ---
 
-# 🧰 Tech Stack
+## 🎯 What I'm Building
 
-## Frontend
+The main idea behind D-Blockerz is to build a browser extension that gives users more control over what happens while they browse.
 
-- React
-- TypeScript
-- Tailwind CSS
-- Vite
+Some of the planned features include:
 
-## Browser Extension
+* Block unwanted advertisements
+* Block common tracking requests
+* See which requests have been blocked
+* Whitelist trusted websites
+* Control blocking for individual websites
+* View basic blocking statistics
+* Add and manage custom blocking rules
+* Provide a simple and easy-to-use interface
 
-- Chrome Extension Manifest V3
-- `declarativeNetRequest`
-- Chrome Extension APIs
-- Chrome Storage API
-
-## Testing
-
-- Playwright
-
-## Development
-
-- ESLint
-- Git
-- GitHub
-- VS Code
+The first version is mainly focused on getting the extension architecture and core functionality working properly before adding more advanced features.
 
 ---
 
-# 🏗️ Planned Architecture
+## 🧰 Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Tailwind CSS
+* Vite
+
+### Chrome Extension
+
+* Chrome Extension Manifest V3
+* `declarativeNetRequest`
+* Chrome Extension APIs
+* Chrome Storage API
+
+### Testing & Development
+
+* Playwright
+* ESLint
+* Git
+* GitHub
+* VS Code
+
+---
+
+## 🏗️ Planned Architecture
+
+The extension will be split into a few main parts. The React UI will handle the user-facing controls, while the background service worker will communicate with Chrome's extension APIs and manage the blocking logic.
 
 ```text
                     D-Blockerz
@@ -94,10 +93,10 @@ The first version focuses on building a reliable browser extension with a modula
               │                   │
               └─────────┬─────────┘
                         ▼
-              Blocking Engine
+                 Blocking Engine
                         │
                         ▼
-           declarativeNetRequest
+            declarativeNetRequest
                         │
                  ┌──────┴──────┐
                  │             │
@@ -108,4 +107,21 @@ The first version focuses on building a reliable browser extension with a modula
               Statistics
                  │
                  ▼
-          Chrome Storage
+            Chrome Storage
+```
+
+---
+
+## 🚀 Development
+
+D-Blockerz is currently under active development. The initial work is focused on setting up the project structure, development environment, and extension foundation.
+
+More features will be added as each sprint is completed.
+
+---
+
+## 📌 Project Goals
+
+The long-term goal is to turn D-Blockerz into a practical browser extension that combines **ad blocking, tracker protection, user controls, and useful browsing statistics** in one lightweight tool.
+
+This is also a learning project where I'm experimenting with **Chrome Extension APIs, React, TypeScript, browser networking, testing, and privacy-focused development**.
