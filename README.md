@@ -1,80 +1,111 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# 🛡️ D-Blockerz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A privacy-focused browser extension for blocking ads and trackers.
 
-Currently, two official plugins are available:
+D-Blockerz is a Manifest V3 browser extension built with React, TypeScript, Vite, and Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The project is being developed incrementally using a modular architecture, automated testing, and AI-assisted development.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚧 Project Status
 
-## Expanding the ESLint configuration
+**Current Status:** Sprint 1 — Foundation ✅
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Sprint Progress
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [x] Sprint 1 — Foundation
+- [ ] Sprint 2 — Chrome Extension Foundation
+- [ ] Sprint 3 — Blocking Engine
+- [ ] Sprint 4 — User Controls
+- [ ] Sprint 5 — Statistics
+- [ ] Sprint 6 — Filter Lists
+- [ ] Sprint 7 — Automated Testing
+- [ ] Sprint 8 — Performance & Security
+- [ ] Sprint 9 — UI/UX Polish
+- [ ] Sprint 10 — Release
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 🎯 Project Goal
 
-```
+D-Blockerz aims to provide a browser-based privacy and content-blocking solution capable of:
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+- Blocking advertisements
+- Blocking trackers
+- Managing blocked requests
+- Allowing users to whitelist websites
+- Providing blocking statistics
+- Providing per-site controls
+- Supporting customizable blocking rules
+- Providing a clean and simple user interface
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The first version focuses on building a reliable browser extension with a modular architecture.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
-=======
-# D-Blockerz
-A Manifest V3 browser extension for blocking ads and trackers.
->>>>>>> c775d6b3917a6f9f2006b412b1a7ea2126e39d13
+# 🧰 Tech Stack
+
+## Frontend
+
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
+
+## Browser Extension
+
+- Chrome Extension Manifest V3
+- `declarativeNetRequest`
+- Chrome Extension APIs
+- Chrome Storage API
+
+## Testing
+
+- Playwright
+
+## Development
+
+- ESLint
+- Git
+- GitHub
+- VS Code
+
+---
+
+# 🏗️ Planned Architecture
+
+```text
+                    D-Blockerz
+                        │
+                        ▼
+              React + TypeScript UI
+                        │
+                        ▼
+                  Manifest V3
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+              ▼                   ▼
+            Popup          Background Worker
+              │                   │
+              │                   ▼
+              │          Chrome Extension APIs
+              │                   │
+              └─────────┬─────────┘
+                        ▼
+              Blocking Engine
+                        │
+                        ▼
+           declarativeNetRequest
+                        │
+                 ┌──────┴──────┐
+                 │             │
+                 ▼             ▼
+               BLOCK         ALLOW
+                 │
+                 ▼
+              Statistics
+                 │
+                 ▼
+          Chrome Storage
