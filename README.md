@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -73,3 +74,7 @@ export default defineConfig([
 ])
 
 ```
+=======
+# D-Blockerz
+A Manifest V3 browser extension for blocking ads and trackers.
+>>>>>>> c775d6b3917a6f9f2006b412b1a7ea2126e39d13
