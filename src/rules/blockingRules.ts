@@ -1,0 +1,18 @@
+export const blockingRules: chrome.declarativeNetRequest.Rule[] = [
+  {
+    id: 1,
+    priority: 1,
+    action: {
+      type: 'block',
+    },
+    condition: {
+      urlFilter: '||ads.example.com^',
+      resourceTypes: [
+        'script',
+        'image',
+        'stylesheet',
+        'xmlhttprequest',
+      ],
+    },
+  },
+]
