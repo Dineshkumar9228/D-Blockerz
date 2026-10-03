@@ -1,80 +1,127 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# 🛡️ D-Blockerz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+D-Blockerz is a privacy-focused browser extension that blocks ads and trackers while you browse the web.
 
-Currently, two official plugins are available:
+I'm building it as a **Manifest V3 Chrome extension** using React, TypeScript, Vite, and Tailwind CSS. The project is being developed step by step, with a focus on keeping the codebase simple, modular, and easy to maintain.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚧 Project Status
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Current Status: Sprint 1 — Foundation ✅**
 
-## Expanding the ESLint configuration
+The project is being developed in multiple sprints:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* [x] Sprint 1 — Foundation
+* [ ] Sprint 2 — Chrome Extension Foundation
+* [ ] Sprint 3 — Blocking Engine
+* [ ] Sprint 4 — User Controls
+* [ ] Sprint 5 — Statistics
+* [ ] Sprint 6 — Filter Lists
+* [ ] Sprint 7 — Automated Testing
+* [ ] Sprint 8 — Performance & Security
+* [ ] Sprint 9 — UI/UX Polish
+* [ ] Sprint 10 — Release
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🎯 What I'm Building
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The main idea behind D-Blockerz is to build a browser extension that gives users more control over what happens while they browse.
 
+Some of the planned features include:
+
+* Block unwanted advertisements
+* Block common tracking requests
+* See which requests have been blocked
+* Whitelist trusted websites
+* Control blocking for individual websites
+* View basic blocking statistics
+* Add and manage custom blocking rules
+* Provide a simple and easy-to-use interface
+
+The first version is mainly focused on getting the extension architecture and core functionality working properly before adding more advanced features.
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Tailwind CSS
+* Vite
+
+### Chrome Extension
+
+* Chrome Extension Manifest V3
+* `declarativeNetRequest`
+* Chrome Extension APIs
+* Chrome Storage API
+
+### Testing & Development
+
+* Playwright
+* ESLint
+* Git
+* GitHub
+* VS Code
+
+---
+
+## 🏗️ Planned Architecture
+
+The extension will be split into a few main parts. The React UI will handle the user-facing controls, while the background service worker will communicate with Chrome's extension APIs and manage the blocking logic.
+
+```text
+                    D-Blockerz
+                        │
+                        ▼
+              React + TypeScript UI
+                        │
+                        ▼
+                  Manifest V3
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+              ▼                   ▼
+            Popup          Background Worker
+              │                   │
+              │                   ▼
+              │          Chrome Extension APIs
+              │                   │
+              └─────────┬─────────┘
+                        ▼
+                 Blocking Engine
+                        │
+                        ▼
+            declarativeNetRequest
+                        │
+                 ┌──────┴──────┐
+                 │             │
+                 ▼             ▼
+               BLOCK         ALLOW
+                 │
+                 ▼
+              Statistics
+                 │
+                 ▼
+            Chrome Storage
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Development
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+D-Blockerz is currently under active development. The initial work is focused on setting up the project structure, development environment, and extension foundation.
 
-```
-=======
-# D-Blockerz
-A Manifest V3 browser extension for blocking ads and trackers.
->>>>>>> c775d6b3917a6f9f2006b412b1a7ea2126e39d13
+More features will be added as each sprint is completed.
+
+---
+
+## 📌 Project Goals
+
+The long-term goal is to turn D-Blockerz into a practical browser extension that combines **ad blocking, tracker protection, user controls, and useful browsing statistics** in one lightweight tool.
+
+This is also a learning project where I'm experimenting with **Chrome Extension APIs, React, TypeScript, browser networking, testing, and privacy-focused development**.
