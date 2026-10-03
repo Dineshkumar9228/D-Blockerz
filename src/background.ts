@@ -1,26 +1,20 @@
+import { blockingRules } from './rules/blockingRules'
+
 console.log('D-Blockerz background service worker started')
 
-const testRule: chrome.declarativeNetRequest.Rule = {
-  id: 1,
-  priority: 1,
-  action: {
-    type: 'block',
-  },
-  condition: {
-    urlFilter: '||ads.example.com^',
-    resourceTypes: ['script', 'image', 'stylesheet', 'xmlhttprequest'],
-  },
-}
-
-chrome.runtime.onInstalled.addListener(async () => {
+async function installBlockingRules() {
   try {
     await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: [testRule.id],
-      addRules: [testRule],
+      removeRuleIds: blockingRules.map((rule) => rule.id),
+      addRules: blockingRules,
     })
 
-    console.log('D-Blockerz blocking rule installed')
+    console.log(
+      `D-Blockerz blocking rules installed: ${blockingRules.length}`,
+    )
   } catch (error) {
-    console.error('Failed to install blocking rule:', error)
+    console.error('Failed to install blocking rules:', error)
   }
-})
+}
+
+installBlockingRules()
