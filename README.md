@@ -13,7 +13,7 @@ I'm building it as a **Manifest V3 Chrome extension** using React, TypeScript, V
 The project is being developed in multiple sprints:
 
 * [x] Sprint 1 — Foundation
-* [ ] Sprint 2 — Chrome Extension Foundation
+* [x] Sprint 2 — Chrome Extension Foundation
 * [ ] Sprint 3 — Blocking Engine
 * [ ] Sprint 4 — User Controls
 * [ ] Sprint 5 — Statistics
