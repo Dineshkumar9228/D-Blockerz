@@ -1,0 +1,1 @@
+console.log('D-Blockerz background service worker started')
