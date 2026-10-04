@@ -1,41 +1,47 @@
 import { useEffect, useState } from 'react'
 import Popup from './pages/Popup'
 import {
-  getProtectionState,
-  setProtectionState,
+  addToWhitelist,
+  getWhitelist,
+  removeFromWhitelist,
 } from './services/storage'
-import {
-  enableBlocking,
-  disableBlocking,
-} from './services/blocking'
+import { getCurrentDomain } from './services/chrome'
 
 function App() {
   const [enabled, setEnabled] = useState(true)
+  const [whitelist, setWhitelist] = useState<string[]>([])
+  const [currentDomain, setCurrentDomain] = useState('Unknown')
 
   useEffect(() => {
-    async function loadProtectionState() {
-      const storedState = await getProtectionState()
-      setEnabled(storedState)
+    async function loadData() {
+      const domains = await getWhitelist()
+      const domain = await getCurrentDomain()
+
+      setWhitelist(domains)
+      setCurrentDomain(domain)
     }
 
-    loadProtectionState()
+    loadData()
   }, [])
 
-  async function handleToggle(nextState: boolean) {
-    setEnabled(nextState)
-    await setProtectionState(nextState)
+  async function handleAddWhitelist(domain: string) {
+    await addToWhitelist(domain)
+    setWhitelist(await getWhitelist())
+  }
 
-    if (nextState) {
-      await enableBlocking()
-    } else {
-      await disableBlocking()
-    }
+  async function handleRemoveWhitelist(domain: string) {
+    await removeFromWhitelist(domain)
+    setWhitelist(await getWhitelist())
   }
 
   return (
     <Popup
       enabled={enabled}
-      onToggle={handleToggle}
+      onToggle={setEnabled}
+      whitelist={whitelist}
+      onAddWhitelist={handleAddWhitelist}
+      onRemoveWhitelist={handleRemoveWhitelist}
+      currentDomain={currentDomain}
     />
   )
 }

@@ -34,3 +34,22 @@ async function restoreProtectionState() {
 }
 
 restoreProtectionState()
+
+chrome.storage.onChanged.addListener(
+  async (changes, areaName) => {
+    if (areaName !== 'local') return
+
+    if (changes.whitelist) {
+      const enabled = await getProtectionState()
+
+      if (enabled) {
+        const whitelist = await getWhitelist()
+        await enableBlocking(whitelist)
+
+        console.log(
+          `D-Blockerz whitelist updated: ${whitelist.length} domains`,
+        )
+      }
+    }
+  },
+)
