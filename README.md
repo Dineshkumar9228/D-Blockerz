@@ -56,7 +56,7 @@ The first version is mainly focused on getting the extension architecture and co
 ### Chrome Extension
 
 * Chrome Extension Manifest V3
-* `declarativeNetRequest`
+* declarativeNetRequest
 * Chrome Extension APIs
 * Chrome Storage API
 
