@@ -7,11 +7,12 @@
     "default_title": "D-Blockerz",
     "default_popup": "index.html"
   },
- "permissions": [
-  "storage",
-  "declarativeNetRequest",
-  "tabs"
-],
+  "permissions": [
+    "storage",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "tabs"
+  ],
   "background": {
     "service_worker": "background.js",
     "type": "module"

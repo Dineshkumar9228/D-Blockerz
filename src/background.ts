@@ -7,6 +7,7 @@ import {
   getWhitelist,
 } from './services/storage'
 
+
 console.log('D-Blockerz background service worker started')
 
 async function restoreProtectionState() {
@@ -44,6 +45,7 @@ chrome.storage.onChanged.addListener(
 
       if (enabled) {
         const whitelist = await getWhitelist()
+
         await enableBlocking(whitelist)
 
         console.log(
