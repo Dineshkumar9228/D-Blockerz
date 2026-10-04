@@ -6,7 +6,10 @@ import {
   getProtectionState,
   getWhitelist,
 } from './services/storage'
-
+import {
+  incrementAdsBlocked,
+  incrementTrackersBlocked,
+} from './services/statistics'
 
 console.log('D-Blockerz background service worker started')
 
@@ -24,7 +27,10 @@ async function restoreProtectionState() {
       )
     } else {
       await disableBlocking()
-      console.log('D-Blockerz protection restored: OFF')
+
+      console.log(
+        'D-Blockerz protection restored: OFF',
+      )
     }
   } catch (error) {
     console.error(
@@ -38,7 +44,9 @@ restoreProtectionState()
 
 chrome.storage.onChanged.addListener(
   async (changes, areaName) => {
-    if (areaName !== 'local') return
+    if (areaName !== 'local') {
+      return
+    }
 
     if (changes.whitelist) {
       const enabled = await getProtectionState()
@@ -55,3 +63,38 @@ chrome.storage.onChanged.addListener(
     }
   },
 )
+
+if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
+  chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
+    async (info) => {
+      const ruleId = info.rule.ruleId
+
+      try {
+        if (ruleId === 1) {
+          await incrementAdsBlocked()
+
+          console.log(
+            'D-Blockerz statistics: ad blocked',
+          )
+        }
+
+        if (ruleId === 2 || ruleId === 3) {
+          await incrementTrackersBlocked()
+
+          console.log(
+            'D-Blockerz statistics: tracker blocked',
+          )
+        }
+      } catch (error) {
+        console.error(
+          'Failed to update blocking statistics:',
+          error,
+        )
+      }
+    },
+  )
+
+  console.log(
+    'D-Blockerz statistics debug listener enabled',
+  )
+}

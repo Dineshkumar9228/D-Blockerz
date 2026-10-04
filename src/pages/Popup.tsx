@@ -1,7 +1,13 @@
+import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Toggle from '../components/Toggle'
 import StatCard from '../components/StatCard'
 import Whitelist from '../components/Whitelist'
+import {
+  getStatistics,
+  resetStatistics,
+} from '../services/statistics'
+import type { Statistics } from '../types/statistics'
 
 type PopupProps = {
   enabled: boolean
@@ -20,7 +26,23 @@ function Popup({
   onRemoveWhitelist,
   currentDomain,
 }: PopupProps) {
+  const [statistics, setStatistics] =
+    useState<Statistics | null>(null)
+
   const isWhitelisted = whitelist.includes(currentDomain)
+
+  useEffect(() => {
+    void getStatistics().then((data) => {
+      setStatistics(data)
+    })
+  }, [])
+
+  async function handleResetStatistics() {
+    await resetStatistics()
+
+    const data = await getStatistics()
+    setStatistics(data)
+  }
 
   function handleSiteProtection() {
     if (isWhitelisted) {
@@ -56,17 +78,30 @@ function Popup({
           </div>
         </section>
 
-        <section className="mt-4 grid grid-cols-2 gap-4">
+        <section className="mt-4 grid grid-cols-3 gap-3">
           <StatCard
             label="Ads blocked"
-            value={0}
+            value={statistics?.adsBlocked ?? 0}
           />
 
           <StatCard
             label="Trackers"
-            value={0}
+            value={statistics?.trackersBlocked ?? 0}
+          />
+
+          <StatCard
+            label="Total blocked"
+            value={statistics?.totalBlocked ?? 0}
           />
         </section>
+
+        <button
+          type="button"
+          onClick={handleResetStatistics}
+          className="mt-4 w-full rounded-xl bg-slate-800 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700"
+        >
+          Reset Statistics
+        </button>
 
         <section className="mt-4 rounded-2xl bg-slate-900 p-4">
           <p className="text-sm text-slate-400">

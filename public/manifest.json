@@ -8,10 +8,11 @@
     "default_popup": "index.html"
   },
   "permissions": [
-    "storage",
-    "declarativeNetRequest",
-    "tabs"
-  ],
+  "storage",
+  "declarativeNetRequest",
+  "declarativeNetRequestFeedback",
+  "tabs"
+],
   "background": {
     "service_worker": "background.js",
     "type": "module"
