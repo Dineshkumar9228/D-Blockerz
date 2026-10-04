@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import Toggle from '../components/Toggle'
 import StatCard from '../components/StatCard'
 import Whitelist from '../components/Whitelist'
+import FilterLists from '../components/FilterLists'
 import {
   getStatistics,
   resetStatistics,
@@ -144,6 +145,8 @@ function Popup({
           onAdd={onAddWhitelist}
           onRemove={onRemoveWhitelist}
         />
+
+        <FilterLists />
       </div>
     </main>
   )

@@ -7,6 +7,9 @@ import {
   getWhitelist,
 } from './services/storage'
 import {
+  initializeFilterLists,
+} from './services/filterLists'
+import {
   incrementAdsBlocked,
   incrementTrackersBlocked,
 } from './services/statistics'
@@ -15,6 +18,8 @@ console.log('D-Blockerz background service worker started')
 
 async function restoreProtectionState() {
   try {
+    await initializeFilterLists()
+
     const enabled = await getProtectionState()
 
     if (enabled) {
@@ -58,6 +63,20 @@ chrome.storage.onChanged.addListener(
 
         console.log(
           `D-Blockerz whitelist updated: ${whitelist.length} domains`,
+        )
+      }
+    }
+
+    if (changes.filterLists) {
+      const enabled = await getProtectionState()
+
+      if (enabled) {
+        const whitelist = await getWhitelist()
+
+        await enableBlocking(whitelist)
+
+        console.log(
+          'D-Blockerz filter lists updated: blocking rules refreshed',
         )
       }
     }
