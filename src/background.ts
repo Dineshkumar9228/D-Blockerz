@@ -1,20 +1,36 @@
-import { blockingRules } from './rules/blockingRules'
+import {
+  enableBlocking,
+  disableBlocking,
+} from './services/blocking'
+import {
+  getProtectionState,
+  getWhitelist,
+} from './services/storage'
 
 console.log('D-Blockerz background service worker started')
 
-async function installBlockingRules() {
+async function restoreProtectionState() {
   try {
-    await chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: blockingRules.map((rule) => rule.id),
-      addRules: blockingRules,
-    })
+    const enabled = await getProtectionState()
 
-    console.log(
-      `D-Blockerz blocking rules installed: ${blockingRules.length}`,
-    )
+    if (enabled) {
+      const whitelist = await getWhitelist()
+
+      await enableBlocking(whitelist)
+
+      console.log(
+        `D-Blockerz protection restored: ON (${whitelist.length} whitelisted domains)`,
+      )
+    } else {
+      await disableBlocking()
+      console.log('D-Blockerz protection restored: OFF')
+    }
   } catch (error) {
-    console.error('Failed to install blocking rules:', error)
+    console.error(
+      'Failed to restore protection state:',
+      error,
+    )
   }
 }
 
-installBlockingRules()
+restoreProtectionState()
