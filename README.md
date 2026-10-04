@@ -8,14 +8,14 @@ I'm building it as a **Manifest V3 Chrome extension** using React, TypeScript, V
 
 ## 🚧 Project Status
 
-**Current Status: Sprint 4 — User Controls ✅**
+**Current Status: Sprint 5 — Statistics Working...**
 
 The project is being developed in multiple sprints:
 
 * [x] Sprint 1 — Foundation
 * [x] Sprint 2 — Chrome Extension Foundation
 * [x] Sprint 3 — Blocking Engine
-* [ ] Sprint 4 — User Controls
+* [x] Sprint 4 — User Controls
 * [ ] Sprint 5 — Statistics
 * [ ] Sprint 6 — Filter Lists
 * [ ] Sprint 7 — Automated Testing
