@@ -43,7 +43,7 @@ test('D-Blockerz protection toggle works', async () => {
       popupPage.getByText('Protection is active'),
     ).toBeVisible()
 
-    const toggle = popupPage.getByRole('button', {
+    const toggle = popupPage.getByRole('switch', {
       name: /disable protection/i,
     })
 
@@ -54,7 +54,7 @@ test('D-Blockerz protection toggle works', async () => {
     ).toBeVisible()
 
     await expect(
-      popupPage.getByRole('button', {
+      popupPage.getByRole('switch', {
         name: /enable protection/i,
       }),
     ).toBeVisible()

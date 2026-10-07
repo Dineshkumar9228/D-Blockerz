@@ -41,12 +41,12 @@ test('D-Blockerz statistics reset works', async () => {
 
     await expect(
       popupPage.getByRole('button', {
-        name: 'Reset Statistics',
+        name: 'Reset',
       }),
     ).toBeVisible()
 
     await popupPage.getByRole('button', {
-      name: 'Reset Statistics',
+      name: 'Reset',
     }).click()
 
     await expect(

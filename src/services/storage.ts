@@ -24,38 +24,72 @@ export async function getWhitelist(): Promise<string[]> {
     WHITELIST_KEY,
   )) as Record<string, unknown>
 
-  return Array.isArray(result[WHITELIST_KEY])
-    ? result[WHITELIST_KEY].filter(
-        (domain): domain is string => typeof domain === 'string',
-      )
-    : []
+  if (!Array.isArray(result[WHITELIST_KEY])) {
+    return []
+  }
+
+  return [
+    ...new Set(
+      result[WHITELIST_KEY]
+        .filter(
+          (domain): domain is string =>
+            typeof domain === 'string',
+        )
+        .map((domain) => domain.trim().toLowerCase())
+        .filter(Boolean),
+    ),
+  ]
 }
 
 export async function setWhitelist(
   whitelist: string[],
 ): Promise<void> {
+  const normalizedWhitelist = [
+    ...new Set(
+      whitelist
+        .filter(
+          (domain): domain is string =>
+            typeof domain === 'string',
+        )
+        .map((domain) => domain.trim().toLowerCase())
+        .filter(Boolean),
+    ),
+  ]
+
   await chrome.storage.local.set({
-    [WHITELIST_KEY]: whitelist,
+    [WHITELIST_KEY]: normalizedWhitelist,
   })
 }
 
 export async function addToWhitelist(
   domain: string,
 ): Promise<void> {
+  const normalizedDomain = domain.trim().toLowerCase()
+
+  if (!normalizedDomain) {
+    return
+  }
+
   const whitelist = await getWhitelist()
 
-  if (!whitelist.includes(domain)) {
-    whitelist.push(domain)
-    await setWhitelist(whitelist)
+  if (!whitelist.includes(normalizedDomain)) {
+    await setWhitelist([
+      ...whitelist,
+      normalizedDomain,
+    ])
   }
 }
 
 export async function removeFromWhitelist(
   domain: string,
 ): Promise<void> {
+  const normalizedDomain = domain.trim().toLowerCase()
+
   const whitelist = await getWhitelist()
 
   await setWhitelist(
-    whitelist.filter((item) => item !== domain),
+    whitelist.filter(
+      (item) => item !== normalizedDomain,
+    ),
   )
 }
