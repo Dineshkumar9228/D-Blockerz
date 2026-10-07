@@ -3,15 +3,21 @@
   "name": "D-Blockerz",
   "version": "0.1.0",
   "description": "A privacy-focused browser extension for blocking ads and trackers.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_title": "D-Blockerz",
     "default_popup": "index.html"
   },
   "permissions": [
-  "storage",
-  "declarativeNetRequest",
-  "tabs"
-],
+    "storage",
+    "declarativeNetRequest",
+    "tabs"
+  ],
   "background": {
     "service_worker": "background.js",
     "type": "module"
