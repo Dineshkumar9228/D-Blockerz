@@ -8,7 +8,7 @@ I'm building it as a **Manifest V3 Chrome extension** using React, TypeScript, V
 
 ## 🚧 Project Status
 
-**Current Status: Sprint 6 — Filter Lists...**
+**Current Status: Sprint 7 — Automated Testing...**
 
 The project is being developed in multiple sprints:
 
@@ -17,7 +17,7 @@ The project is being developed in multiple sprints:
 * [x] Sprint 3 — Blocking Engine
 * [x] Sprint 4 — User Controls
 * [x] Sprint 5 — Statistics
-* [ ] Sprint 6 — Filter Lists
+* [x] Sprint 6 — Filter Lists
 * [ ] Sprint 7 — Automated Testing
 * [ ] Sprint 8 — Performance & Security
 * [ ] Sprint 9 — UI/UX Polish
