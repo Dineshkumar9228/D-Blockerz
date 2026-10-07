@@ -9,6 +9,9 @@ export default function Statistics() {
   const [statistics, setStatistics] =
     useState<StatisticsData | null>(null)
 
+  const [resetting, setResetting] =
+    useState(false)
+
   useEffect(() => {
     void getStatistics().then((data) => {
       setStatistics(data)
@@ -16,50 +19,73 @@ export default function Statistics() {
   }, [])
 
   async function handleReset() {
-    await resetStatistics()
+    if (resetting) {
+      return
+    }
 
-    const data = await getStatistics()
-    setStatistics(data)
+    setResetting(true)
+
+    try {
+      await resetStatistics()
+
+      const data = await getStatistics()
+      setStatistics(data)
+    } finally {
+      setResetting(false)
+    }
   }
 
   if (!statistics) {
     return (
-      <div className="grid grid-cols-3 gap-3">
-        <div>Loading...</div>
+      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+        <p className="text-sm text-slate-400">
+          Loading statistics...
+        </p>
       </div>
     )
   }
 
   return (
-    <div>
-      <div className="grid grid-cols-3 gap-3">
-        <div>
-          <p className="text-2xl font-bold">
+    <section className="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+      <div className="mb-4">
+        <p className="text-sm font-semibold text-white">
+          Statistics
+        </p>
+
+        <p className="mt-1 text-xs leading-5 text-slate-500">
+          Live blocked-request counting is currently
+          unavailable in production builds.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-3 gap-2">
+        <div className="rounded-xl bg-slate-800/60 p-3">
+          <p className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
+            Ads
+          </p>
+
+          <p className="mt-2 text-xl font-bold text-white">
             {statistics.adsBlocked}
           </p>
-
-          <p className="text-xs text-gray-500">
-            Ads Blocked
-          </p>
         </div>
 
-        <div>
-          <p className="text-2xl font-bold">
+        <div className="rounded-xl bg-slate-800/60 p-3">
+          <p className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
+            Trackers
+          </p>
+
+          <p className="mt-2 text-xl font-bold text-white">
             {statistics.trackersBlocked}
           </p>
-
-          <p className="text-xs text-gray-500">
-            Trackers Blocked
-          </p>
         </div>
 
-        <div>
-          <p className="text-2xl font-bold">
-            {statistics.totalBlocked}
+        <div className="rounded-xl bg-slate-800/60 p-3">
+          <p className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
+            Total
           </p>
 
-          <p className="text-xs text-gray-500">
-            Total Blocked
+          <p className="mt-2 text-xl font-bold text-white">
+            {statistics.totalBlocked}
           </p>
         </div>
       </div>
@@ -67,10 +93,11 @@ export default function Statistics() {
       <button
         type="button"
         onClick={handleReset}
-        className="mt-4 w-full rounded-xl bg-slate-800 px-4 py-3 text-sm font-medium text-white hover:bg-slate-700"
+        disabled={resetting}
+        className="mt-4 w-full rounded-xl bg-slate-800 px-4 py-3 text-sm font-medium text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        Reset Statistics
+        {resetting ? 'Resetting...' : 'Reset Statistics'}
       </button>
-    </div>
+    </section>
   )
 }

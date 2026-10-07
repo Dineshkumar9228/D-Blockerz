@@ -12,8 +12,11 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        index: resolve(__dirname, 'index.html'),
-        background: resolve(__dirname, 'src/background.ts'),
+        index: resolve(process.cwd(), 'index.html'),
+        background: resolve(
+          process.cwd(),
+          'src/background.ts',
+        ),
       },
 
       output: {
