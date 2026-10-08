@@ -8,7 +8,7 @@ I'm building it as a **Manifest V3 Chrome extension** using React, TypeScript, V
 
 ## 🚧 Project Status
 
-**Current Status: Sprint 8 — Performance & Security...**
+**Current Status: Waiting for Edge Approval...**
 
 The project is being developed in multiple sprints:
 
