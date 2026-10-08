@@ -20,7 +20,7 @@ The project is being developed in multiple sprints:
 * [x] Sprint 6 — Filter Lists
 * [x] Sprint 7 — Automated Testing
 * [x] Sprint 8 — Performance & Security
-* [ ] Sprint 9 — UI/UX Polish
+* [x] Sprint 9 — UI/UX Polish
 * [ ] Sprint 10 — Release
 
 ---
