@@ -1,127 +1,164 @@
-# 🛡️ D-Blockerz
+# D-Blockerz
 
-D-Blockerz is a privacy-focused browser extension that blocks ads and trackers while you browse the web.
+**A privacy-focused browser extension for blocking ads and trackers.**
 
-I'm building it as a **Manifest V3 Chrome extension** using React, TypeScript, Vite, and Tailwind CSS. The project is being developed step by step, with a focus on keeping the codebase simple, modular, and easy to maintain.
+D-Blockerz is a Manifest V3 browser extension built with React and TypeScript. It uses the browser's `declarativeNetRequest` API to block network requests that match enabled rules, with controls for protection, site exceptions, and filter lists.
 
----
+- **Version:** 0.1.0
+- **Browser availability:** Microsoft Edge Add-ons
+- **Repository:** https://github.com/Dineshkumar9228/D-Blockerz
+- **Privacy policy:** https://dineshkumar9228.github.io/D-Blockerz/privacy-policy.html
+- **Release:** https://github.com/Dineshkumar9228/D-Blockerz/releases/tag/v0.1.0
 
-## 🚧 Project Status
+## Features
 
-**Current Status: Waiting for Edge Approval...**
+- Network request blocking using Manifest V3 `declarativeNetRequest`.
+- Protection toggle to enable or disable blocking.
+- Per-site whitelist to allow requests for selected domains.
+- Built-in filter lists for advertising, tracking, and analytics domains.
+- Persistent settings stored locally in browser extension storage.
+- Popup interface showing the current website and protection state.
+- Local statistics interface for stored blocking counters.
+- Automated tests using Playwright.
 
-The project is being developed in multiple sprints:
+> **Current limitations:** Filter coverage is limited in version 0.1.0. D-Blockerz does not guarantee that every ad or tracker will be blocked, and YouTube ads may still appear. Production-safe live counting of every blocked request is not implemented yet, so statistics may not reflect actual blocking activity. Cosmetic filtering (removing ad elements from web pages) is also not currently implemented.
 
-* [x] Sprint 1 — Foundation
-* [x] Sprint 2 — Chrome Extension Foundation
-* [x] Sprint 3 — Blocking Engine
-* [x] Sprint 4 — User Controls
-* [x] Sprint 5 — Statistics
-* [x] Sprint 6 — Filter Lists
-* [x] Sprint 7 — Automated Testing
-* [x] Sprint 8 — Performance & Security
-* [x] Sprint 9 — UI/UX Polish
-* [x] Sprint 10 — Release
+## Installation
 
----
+### Microsoft Edge
 
-## 🎯 What I'm Building
+1. Open Microsoft Edge.
+2. Open **Extensions** and choose **Get extensions from Microsoft Edge Add-ons**, or search the Edge Add-ons store for **D-Blockerz**.
+3. Select D-Blockerz and click **Get**.
+4. Confirm the installation when prompted.
+5. Open the extension popup to configure protection, the whitelist, and filter lists.
 
-The main idea behind D-Blockerz is to build a browser extension that gives users more control over what happens while they browse.
+### Local development build
 
-Some of the planned features include:
+1. Clone the repository and install dependencies.
+2. Build the extension.
+3. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
+4. Enable **Developer mode**.
+5. Click **Load unpacked** and select the generated `dist` directory.
 
-* Block unwanted advertisements
-* Block common tracking requests
-* See which requests have been blocked
-* Whitelist trusted websites
-* Control blocking for individual websites
-* View basic blocking statistics
-* Add and manage custom blocking rules
-* Provide a simple and easy-to-use interface
+## Development
 
-The first version is mainly focused on getting the extension architecture and core functionality working properly before adding more advanced features.
+### Requirements
 
----
+- Node.js and npm
+- Git
+- Chrome or Microsoft Edge for manual extension testing
 
-## 🧰 Tech Stack
+### Setup
 
-### Frontend
-
-* React
-* TypeScript
-* Tailwind CSS
-* Vite
-
-### Chrome Extension
-
-* Chrome Extension Manifest V3
-* declarativeNetRequest
-* Chrome Extension APIs
-* Chrome Storage API
-
-### Testing & Development
-
-* Playwright
-* ESLint
-* Git
-* GitHub
-* VS Code
-
----
-
-## 🏗️ Planned Architecture
-
-The extension will be split into a few main parts. The React UI will handle the user-facing controls, while the background service worker will communicate with Chrome's extension APIs and manage the blocking logic.
-
-```text
-                    D-Blockerz
-                        │
-                        ▼
-              React + TypeScript UI
-                        │
-                        ▼
-                  Manifest V3
-                        │
-              ┌─────────┴─────────┐
-              │                   │
-              ▼                   ▼
-            Popup          Background Worker
-              │                   │
-              │                   ▼
-              │          Chrome Extension APIs
-              │                   │
-              └─────────┬─────────┘
-                        ▼
-                 Blocking Engine
-                        │
-                        ▼
-            declarativeNetRequest
-                        │
-                 ┌──────┴──────┐
-                 │             │
-                 ▼             ▼
-               BLOCK         ALLOW
-                 │
-                 ▼
-              Statistics
-                 │
-                 ▼
-            Chrome Storage
+```bash
+git clone https://github.com/Dineshkumar9228/D-Blockerz.git
+cd D-Blockerz
+npm install
 ```
 
----
+### Build
 
-## 🚀 Development
+```bash
+npm run build
+```
 
-D-Blockerz is currently under active development. The initial work is focused on setting up the project structure, development environment, and extension foundation.
+The built extension is written to `dist/`. Load this folder as an unpacked extension for local testing.
 
-More features will be added as each sprint is completed.
+### Lint
 
----
+```bash
+npm run lint
+```
 
-## 📌 Project Goals
+### Automated tests
 
-The long-term goal is to turn D-Blockerz into a practical browser extension that combines **ad blocking, tracker protection, user controls, and useful browsing statistics** in one lightweight tool.
+```bash
+npx playwright test
+```
 
-This is also a learning project where I'm experimenting with **Chrome Extension APIs, React, TypeScript, browser networking, testing, and privacy-focused development**.
+The Playwright suite covers extension loading, smoke checks, protection controls, whitelist behavior, filter lists, and statistics UI. Extension-specific tests may require a headed Chromium environment depending on the local browser and test configuration.
+
+## How It Works
+
+```text
+Website request
+      |
+      v
+Browser declarativeNetRequest engine
+      |
+      v
+Enabled D-Blockerz rules
+      |
+      +---- Rule matches ----> Block or allow request
+      |
+      +---- No match --------> Request continues
+```
+
+Blocking decisions are enforced by the browser's network request filtering API. Extension settings and whitelist data are stored locally using the browser's extension storage API. The core blocking functionality does not require a D-Blockerz backend server.
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Chrome/Edge Manifest V3
+- `declarativeNetRequest`
+- Chrome Storage API
+- Playwright
+- ESLint
+- Git and GitHub
+
+## Permissions
+
+| Permission | Purpose |
+|---|---|
+| `storage` | Persist protection state, whitelist, filter-list settings, and locally stored statistics. |
+| `declarativeNetRequest` | Apply blocking and allow rules to network requests. |
+| `tabs` | Read the active tab URL so the popup can show the current hostname and offer site-specific controls. |
+
+D-Blockerz does not require a user account. See the [Privacy Policy](https://dineshkumar9228.github.io/D-Blockerz/privacy-policy.html) for data-handling details.
+
+## Project Structure
+
+```text
+public/
+  icons/
+  manifest.json
+src/
+  components/
+  pages/
+  rules/
+  services/
+  types/
+tests/
+docs/
+  privacy-policy.html
+```
+
+## Testing the Blocking Engine
+
+The blocking engine has been tested locally in Chrome. A direct request to `https://www.google-analytics.com/analytics.js` returned `net::ERR_BLOCKED_BY_CLIENT` while the corresponding D-Blockerz filter rule was enabled.
+
+This confirms that the matching rule can block a real network request in the tested setup. It does **not** mean that all analytics endpoints, advertisements, or YouTube ads are blocked.
+
+## Release
+
+The current release is **[D-Blockerz v0.1.0](https://github.com/Dineshkumar9228/D-Blockerz/releases/tag/v0.1.0)**.
+
+Release downloads and source archives are available on the GitHub Releases page.
+
+## Contributing
+
+Issues and suggestions are welcome. Please include:
+
+- Browser and browser version
+- D-Blockerz version
+- Steps to reproduce
+- Expected behavior and actual behavior
+- Relevant console errors or screenshots, with personal information removed
+
+## License
+
+No license has been specified yet. Unless a license is added to this repository, the source code is not automatically granted an open-source license.
