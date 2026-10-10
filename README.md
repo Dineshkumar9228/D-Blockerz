@@ -21,7 +21,7 @@ The project is being developed in multiple sprints:
 * [x] Sprint 7 — Automated Testing
 * [x] Sprint 8 — Performance & Security
 * [x] Sprint 9 — UI/UX Polish
-* [ ] Sprint 10 — Release
+* [x] Sprint 10 — Release
 
 ---
 
