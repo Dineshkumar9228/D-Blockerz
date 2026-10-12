@@ -32,7 +32,7 @@ D-Blockerz is a Manifest V3 browser extension built with React and TypeScript. I
 - **Modern popup UI** built with React, TypeScript, and Tailwind CSS.
 - **Automated tests** using Playwright.
 
-## Installation
+## Installation Guide
 
 ### Microsoft Edge
 
