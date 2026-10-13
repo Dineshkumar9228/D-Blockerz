@@ -20,7 +20,7 @@ D-Blockerz is a Manifest V3 browser extension built with React and TypeScript. I
 - **Latest release:** [D-Blockerz v0.1.0](https://github.com/Dineshkumar9228/D-Blockerz/releases/tag/v0.1.0)
 - **Privacy policy:** [Read the Privacy Policy](https://dineshkumar9228.github.io/D-Blockerz/privacy-policy.html)
 
-## Features
+## Features List
 
 - **Ad and tracker blocking** using the browser's Manifest V3 `declarativeNetRequest` API.
 - **Protection toggle** to enable or disable network blocking.
